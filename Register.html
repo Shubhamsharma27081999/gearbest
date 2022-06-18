@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<style>
+    * {
+        margin: 0px;
+        padding:0px;
+        box-sizing: border-box;
+    }
+    #nav {
+        height:200px;
+        margin: auto;
+    }
+    #logo {
+        height:25%;
+        width:15%;
+        margin-left: 20%;
+        margin-top: 10px;
+    }
+    #main {
+        width:20%;
+        padding:10px;
+        margin-left: 70%;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+    form,input {
+        width:100%;
+        padding:10px;
+        margin:auto;
+        margin-bottom: 20px;
+    }
+    #submit {
+        width:100%;
+        background-color: yellow;
+        height:50px;
+        margin-top: 50px;
+    }
+    p {
+        display: flex;
+        flex-direction: row;
+    }
+    #checkbox {
+        margin-left: 10px;
+    }
+</style>
+<body>
+    <div id="nav">
+        <img id="logo" src="https://uidesign.gbtcdn.com/GB/images/promotion/2019/a_evan/Gearbest/logo_gearbest.png" alt = "logo">
+    </div>
+    <div id="main">
+        <h1><u>Register</u></h1>
+        <form>
+            <input id="email" placeholder="Email" type="E-mail" >
+            <input id="password" placeholder="Password" type="password">
+            <button id="submit">Register</button>
+        </form>
+    </div>
+</body>
+<script>
+    let form = document.querySelector("form");
+
+    let userData = JSON.parse(localStorage.getItem("userData")) || [];
+
+    form.addEventListener("submit",function() {
+        event.preventDefault();
+        let data =  {
+            email:form.email.value,
+            password:form.password.value,
+        }
+        if(checkEmail(data.email) === true) {
+            userData.push(data);
+            localStorage.setItem("userData",JSON.stringify(userData));
+        }
+        else {
+            alert("Account Already Created");
+        }
+    })
+
+    function checkEmail() {
+        let filtered = userData.filter(function(element){
+            return email === element.email;
+        })
+        if (filtered.length > 0) {
+            return false;
+        } 
+        else {
+            return true;
+        }
+    }
+    console.log(userData);
+</script>
+</html>
